@@ -1,6 +1,6 @@
 {
   "name": "Budget Buddy",
-  "short_name": "BudgetBuddy",
+  "short_name": "Budget Buddy",
   "description": "A simple, user-friendly personal finance and budgeting PWA for tracking income, expenses, and categories.",
   "start_url": "./index.html",
   "display": "standalone",
