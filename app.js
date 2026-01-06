@@ -30,7 +30,7 @@ function updateUI() {
     li.classList.add(tx.amount > 0 ? 'income' : 'expense');
     li.innerHTML = `
       <span>${tx.description} <span class="category">[${tx.category}]</span></span>
-      <span>$${tx.amount.toFixed(2)}</span>
+      <span>Ksh.${tx.amount.toFixed(2)}</span>
       <button onclick="deleteTransaction(${index})">x</button>
     `;
     transactionListEl.appendChild(li);
@@ -44,9 +44,9 @@ function updateUI() {
   });
 
   const balance = income - expenses;
-  balanceEl.textContent = `$${balance.toFixed(2)}`;
-  incomeEl.textContent = `$${income.toFixed(2)}`;
-  expensesEl.textContent = `$${expenses.toFixed(2)}`;
+  balanceEl.textContent = `Ksh.${balance.toFixed(2)}`;
+  incomeEl.textContent = `Ksh.${income.toFixed(2)}`;
+  expensesEl.textContent = `Ksh.${expenses.toFixed(2)}`;
 
   // Animate balance card
   balanceEl.parentElement.classList.add('animate');
