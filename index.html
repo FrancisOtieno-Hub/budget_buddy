@@ -13,19 +13,19 @@
   </header>
 
   <main>
-    <!-- Monthly Summary -->
+    <!-- Summary Cards -->
     <section class="summary">
       <div class="card">
         <h2>Balance</h2>
-        <p id="balance" class="balance">Ksh.0.00</p>
+        <p id="balance" class="balance">Ksh. 0.00</p>
       </div>
       <div class="card">
         <h2>Income</h2>
-        <p id="income" class="income">Ksh.0.00</p>
+        <p id="income" class="income">Ksh. 0.00</p>
       </div>
       <div class="card">
         <h2>Expenses</h2>
-        <p id="expenses" class="expenses">Ksh.0.00</p>
+        <p id="expenses" class="expenses">Ksh. 0.00</p>
       </div>
     </section>
 
@@ -40,7 +40,7 @@
       <h2>Add Transaction</h2>
       <form id="transaction-form">
         <input type="text" id="description" placeholder="Description" required>
-        <input type="number" id="amount" placeholder="Amount (negative for expense)" required>
+        <input type="number" id="amount" placeholder="Amount" min="0" required>
         <select id="category" required>
           <option value="">Select Category</option>
           <option value="Food">Food</option>
@@ -49,14 +49,25 @@
           <option value="Entertainment">Entertainment</option>
           <option value="Others">Others</option>
         </select>
+        
+        <!-- Transactions -->
+        <section class="transactions">
+          <h2>Transactions</h2>
+          <ul id="transaction-list"></ul>
+        </section>
+
+        <!-- Income / Expense Selection -->
+        <div class="transaction-type">
+          <label class="income-label">
+            <input type="radio" name="type" value="income" checked> Income
+          </label>
+          <label class="expense-label">
+            <input type="radio" name="type" value="expense"> Expense
+          </label>
+        </div>
+
         <button type="submit">Add</button>
       </form>
-    </section>
-    
-    <!-- Transaction List -->
-    <section class="transactions">
-      <h2>Transactions</h2>
-      <ul id="transaction-list"></ul>
     </section>
   </main>
 
