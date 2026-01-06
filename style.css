@@ -19,7 +19,7 @@ main { max-width:600px; margin:2rem auto; padding:0 1rem; }
 .expenses { color:red; font-weight:bold; }
 
 /* Transactions */
-.transactions ul { list-style:none; }
+.transactions ul { list-style:none; margin-top:1rem; }
 .transactions li { background:white; padding:0.8rem 1rem; margin-bottom:0.5rem; border-radius:8px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 3px rgba(0,0,0,0.1); opacity:0; animation: fadeIn 0.5s forwards; }
 .transactions li.income { border-left:5px solid green; }
 .transactions li.expense { border-left:5px solid red; }
@@ -29,11 +29,66 @@ main { max-width:600px; margin:2rem auto; padding:0 1rem; }
 
 @keyframes fadeIn { to { opacity:1; } }
 
-/* Add Transaction */
-.add-transaction form { display:flex; flex-direction:column; gap:0.5rem; }
+/* Add Transaction Form */
+.add-transaction form { display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem; }
 .add-transaction input, .add-transaction select { padding:0.5rem; border-radius:5px; border:1px solid #ccc; font-size:1rem; }
 .add-transaction button { padding:0.6rem; border:none; border-radius:5px; background:#4CAF50; color:white; font-size:1rem; cursor:pointer; }
 .add-transaction button:hover { background:#45a049; }
 
+/* Transaction Type Selection */
+.transaction-type {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.transaction-type input {
+  display: none; /* hide the default radio button */
+}
+
+/* Income Label */
+.income-label {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 5px;
+  text-align: center;
+  background: #e0f7e9;
+  color: #2e7d32;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+}
+
+/* Expense Label */
+.expense-label {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 5px;
+  text-align: center;
+  background: #fdecea;
+  color: #c62828;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+}
+
+/* Highlight selected type */
+.transaction-type input:checked + label {
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  border: 2px solid currentColor;
+}
+
+/* Hover effect */
+.income-label:hover { background: #c8f2d7; }
+.expense-label:hover { background: #f9d8d6; }
+
 /* Chart Section */
 .chart-section { background:white; padding:1rem; border-radius:10px; margin-bottom:2rem; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .summary { flex-direction: column; }
+  .card { margin:0.5rem 0; }
+  .transaction-type { flex-direction: column; }
+}
