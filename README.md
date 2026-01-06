@@ -1,7 +1,5 @@
 # **Budget Buddy – Personal Finance & Budgeting PWA**
 
-![Budget Buddy Logo](./icon.png)
-
 **Budget Buddy** is a modern, simple, and intuitive Progressive Web App (PWA) designed to help users manage personal finances effortlessly. It’s built using **HTML, CSS, and JavaScript**, with offline capabilities and a responsive interface suitable for **both young adults and the elderly**.
 
 ---
