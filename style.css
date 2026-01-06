@@ -1,0 +1,39 @@
+/* Reset & Base */
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f7f7f7; color:#333; line-height:1.6; }
+
+header { background:#4CAF50; color:white; padding:1rem; text-align:center; }
+h1 { font-size:2rem; }
+
+main { max-width:600px; margin:2rem auto; padding:0 1rem; }
+
+/* Summary Cards */
+.summary { display:flex; justify-content:space-between; margin-bottom:2rem; }
+.card { background:white; flex:1; margin:0 0.5rem; padding:1rem; border-radius:10px; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s; }
+.card h2 { margin-bottom:0.5rem; font-size:1.2rem; }
+.card.animate { transform: scale(1.05); }
+
+/* Color coding */
+.balance { font-weight:bold; font-size:1.5rem; }
+.income { color:green; font-weight:bold; }
+.expenses { color:red; font-weight:bold; }
+
+/* Transactions */
+.transactions ul { list-style:none; }
+.transactions li { background:white; padding:0.8rem 1rem; margin-bottom:0.5rem; border-radius:8px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 3px rgba(0,0,0,0.1); opacity:0; animation: fadeIn 0.5s forwards; }
+.transactions li.income { border-left:5px solid green; }
+.transactions li.expense { border-left:5px solid red; }
+.transactions li span.category { font-size:0.8rem; color:#666; margin-left:0.5rem; }
+.transactions button { background:none; border:none; color:#999; font-weight:bold; cursor:pointer; }
+.transactions button:hover { color:red; }
+
+@keyframes fadeIn { to { opacity:1; } }
+
+/* Add Transaction */
+.add-transaction form { display:flex; flex-direction:column; gap:0.5rem; }
+.add-transaction input, .add-transaction select { padding:0.5rem; border-radius:5px; border:1px solid #ccc; font-size:1rem; }
+.add-transaction button { padding:0.6rem; border:none; border-radius:5px; background:#4CAF50; color:white; font-size:1rem; cursor:pointer; }
+.add-transaction button:hover { background:#45a049; }
+
+/* Chart Section */
+.chart-section { background:white; padding:1rem; border-radius:10px; margin-bottom:2rem; text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
