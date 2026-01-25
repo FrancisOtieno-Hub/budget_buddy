@@ -3,74 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Budget Buddy</title>
+  <meta name="description" content="Budget Buddy - Track your income and expenses effortlessly">
+  <meta name="theme-color" content="#4CAF50">
+  <title>Budget Buddy - Personal Finance Tracker</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="icon.png">
 </head>
 <body>
   <header>
-    <h1>Budget Buddy</h1>
+    <div class="header-content">
+      <h1>💰 Budget Buddy</h1>
+      <button id="exportBtn" class="icon-btn" aria-label="Export data" title="Export transactions">
+        <span>📊</span>
+      </button>
+    </div>
   </header>
 
   <main>
     <!-- Summary Cards -->
-    <section class="summary">
-      <div class="card">
+    <section class="summary" role="region" aria-label="Financial Summary">
+      <div class="card balance-card">
         <h2>Balance</h2>
         <p id="balance" class="balance">Ksh. 0.00</p>
       </div>
-      <div class="card">
+      <div class="card income-card">
         <h2>Income</h2>
         <p id="income" class="income">Ksh. 0.00</p>
       </div>
-      <div class="card">
+      <div class="card expenses-card">
         <h2>Expenses</h2>
         <p id="expenses" class="expenses">Ksh. 0.00</p>
       </div>
     </section>
 
     <!-- Category Chart -->
-    <section class="chart-section">
-      <h2>Category Breakdown</h2>
-      <canvas id="categoryChart" width="300" height="300"></canvas>
+    <section class="chart-section" role="region" aria-label="Category Breakdown">
+      <div class="chart-header">
+        <h2>Spending by Category</h2>
+        <select id="chartPeriod" aria-label="Select period">
+          <option value="current">This Month</option>
+          <option value="all">All Time</option>
+        </select>
+      </div>
+      <div class="chart-container">
+        <canvas id="categoryChart" width="300" height="300" aria-label="Category spending chart"></canvas>
+        <div id="chartLegend" class="chart-legend"></div>
+      </div>
+      <p id="noDataMessage" class="no-data" hidden>No expenses to display yet. Add your first transaction below!</p>
     </section>
 
     <!-- Add Transaction Form -->
-    <section class="add-transaction">
+    <section class="add-transaction" role="region" aria-label="Add Transaction">
       <h2>Add Transaction</h2>
-      <form id="transaction-form">
-        <input type="text" id="description" placeholder="Description" required>
-        <input type="number" id="amount" placeholder="Amount" min="0" required>
-        <select id="category" required>
-          <option value="">Select Category</option>
-          <option value="Food">Food</option>
-          <option value="Rent">Rent</option>
-          <option value="Utilities">Utilities</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Others">Others</option>
-        </select>
-
-        <!-- Income / Expense Selection -->
-        <div class="transaction-type">
-          <label class="income-label">
-            <input type="radio" name="type" value="income" checked> Income
-          </label>
-          <label class="expense-label">
-            <input type="radio" name="type" value="expense"> Expense
-          </label>
+      <form id="transaction-form" novalidate>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input 
+            type="text" 
+            id="description" 
+            placeholder="e.g., Grocery shopping" 
+            maxlength="100"
+            required
+            aria-required="true">
+          <span class="error-message" id="descError"></span>
         </div>
 
-        <button type="submit">Add</button>
-        
-        <!-- Transactions -->
-        <section class="transactions">
-          <h2>Transactions</h2>
-          <ul id="transaction-list"></ul>
-        </section>
+        <div class="form-group">
+          <label for="amount">Amount (Ksh)</label>
+          <input 
+            type="number" 
+            id="amount" 
+            placeholder="0.00" 
+            min="0.01" 
+            step="0.01"
+            required
+            aria-required="true">
+          <span class="error-message" id="amountError"></span>
+        </div>
 
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" required aria-required="true">
+            <option value="">Select Category</option>
+            <option value="Food">🍔 Food & Dining</option>
+            <option value="Rent">🏠 Rent & Housing</option>
+            <option value="Utilities">💡 Utilities</option>
+            <option value="Transportation">🚗 Transportation</option>
+            <option value="Entertainment">🎬 Entertainment</option>
+            <option value="Healthcare">⚕️ Healthcare</option>
+            <option value="Shopping">🛍️ Shopping</option>
+            <option value="Education">📚 Education</option>
+            <option value="Salary">💼 Salary</option>
+            <option value="Investment">📈 Investment</option>
+            <option value="Others">📦 Others</option>
+          </select>
+          <span class="error-message" id="categoryError"></span>
+        </div>
+
+        <!-- Transaction Type Selection -->
+        <div class="form-group">
+          <label>Transaction Type</label>
+          <div class="transaction-type" role="radiogroup" aria-label="Transaction type">
+            <input type="radio" name="type" id="type-income" value="income" checked>
+            <label for="type-income" class="income-label">
+              <span>➕</span> Income
+            </label>
+            
+            <input type="radio" name="type" id="type-expense" value="expense">
+            <label for="type-expense" class="expense-label">
+              <span>➖</span> Expense
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">
+          <span id="submitBtnText">Add Transaction</span>
+        </button>
+        <button type="button" id="cancelEdit" class="btn-secondary" hidden>Cancel Edit</button>
       </form>
     </section>
+
+    <!-- Filter and Search -->
+    <section class="filter-section" role="region" aria-label="Filter Transactions">
+      <div class="filter-controls">
+        <input 
+          type="search" 
+          id="searchBox" 
+          placeholder="🔍 Search transactions..."
+          aria-label="Search transactions">
+        <select id="filterCategory" aria-label="Filter by category">
+          <option value="">All Categories</option>
+          <option value="Food">Food & Dining</option>
+          <option value="Rent">Rent & Housing</option>
+          <option value="Utilities">Utilities</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Education">Education</option>
+          <option value="Salary">Salary</option>
+          <option value="Investment">Investment</option>
+          <option value="Others">Others</option>
+        </select>
+        <select id="filterType" aria-label="Filter by type">
+          <option value="">All Types</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Transactions List -->
+    <section class="transactions" role="region" aria-label="Transaction History">
+      <div class="transactions-header">
+        <h2>Transaction History</h2>
+        <button id="clearAllBtn" class="btn-danger-outline" aria-label="Clear all transactions">
+          Clear All
+        </button>
+      </div>
+      <ul id="transaction-list" role="list"></ul>
+      <p id="noTransactions" class="no-data" hidden>No transactions yet. Start by adding your first transaction above!</p>
+    </section>
   </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="alert" aria-live="polite" hidden></div>
 
   <script src="app.js"></script>
 </body>
