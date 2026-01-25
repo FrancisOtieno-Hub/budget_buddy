@@ -1,22 +1,73 @@
 {
-  "name": "Budget Buddy",
+  "name": "Budget Buddy - Personal Finance Tracker",
   "short_name": "Budget Buddy",
-  "description": "A simple, user-friendly personal finance and budgeting PWA for tracking income, expenses, and categories.",
-  "start_url": "./index.html",
+  "description": "Track your income, expenses, and budgets effortlessly. Modern PWA for personal finance management with offline support.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#f7f7f7",
+  "background_color": "#f5f7fa",
   "theme_color": "#4CAF50",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
+  "categories": ["finance", "productivity", "lifestyle"],
+  "lang": "en-US",
+  "dir": "ltr",
   "icons": [
     {
       "src": "icon.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "icon.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add Income",
+      "short_name": "Income",
+      "description": "Quickly add an income transaction",
+      "url": "./?action=add-income",
+      "icons": [
+        {
+          "src": "icon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Add Expense",
+      "short_name": "Expense",
+      "description": "Quickly add an expense transaction",
+      "url": "./?action=add-expense",
+      "icons": [
+        {
+          "src": "icon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "./",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text"
+    }
+  },
+  "prefer_related_applications": false
 }
